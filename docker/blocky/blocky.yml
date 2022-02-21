@@ -1,0 +1,111 @@
+# Configuration file blocky.conf for Blocky # https://0xerr0r.github.io/blocky/
+
+upstream:
+  # List of public DNS servers: https://0xerr0r.github.io/blocky/additional_information/#list-of-public-dns-servers
+  default:
+  #  - tcp-tls:172.16.1.2 # You own secure upstream DNS server
+    - tcp-tls:1.1.1.1 # one.one.one.one
+    - tcp-tls:1.0.0.1 # one.one.one.one
+    - tcp-tls:8.8.8.8 # Google
+    - tcp-tls:8.8.4.4 # Google
+    - tcp-tls:9.9.9.9 # quad9.net
+    #- 149.112.112.112 # quad9.net
+  # Restrict DNS for some network
+  #192.168.100.0/24:
+  #  - 1.1.1.1
+  #  - 9.9.9.9
+conditional:
+  rewrite:
+    YOUR-DOMAINtest.COM: YOUR-DOMAIN.COM
+  mapping:
+    # Mapping some zones
+    local.YOUR-DOMAIN.COM: udp:10.10.1.15,udp:10.10.2.15
+    # for reverse DNS lookups of local devices
+    1.10.10.in-addr.arpa: udp:10.10.1.15,udp:10.10.2.15
+    2.10.10.in-addr.arpa: udp:10.10.1.15,udp:10.10.2.15
+blocking:
+  refreshPeriod: 60m # Reload blocklist Every NN minutes
+  downloadTimeout: 2m # Download Timeout (for each URL) for big lists or slow internet connection
+  blockType: zeroIp
+  blackLists:
+    default:
+      - https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts
+    suspicious:
+      - https://raw.githubusercontent.com/PolishFiltersTeam/KADhosts/master/KADhosts.txt
+      - https://raw.githubusercontent.com/FadeMind/hosts.extras/master/add.Spam/hosts
+      - https://v.firebog.net/hosts/static/w3kbl.txt
+    advertising:
+      - https://easylist.to/easylist/easylist.txt
+      - https://secure.fanboy.co.nz/fanboy-cookiemonster.txt
+      - https://adaway.org/hosts.txt
+      - https://v.firebog.net/hosts/AdguardDNS.txt
+      - https://v.firebog.net/hosts/Admiral.txt
+      - https://raw.githubusercontent.com/anudeepND/blacklist/master/adservers.txt
+      - https://s3.amazonaws.com/lists.disconnect.me/simple_ad.txt
+      - https://v.firebog.net/hosts/Easylist.txt
+      - https://pgl.yoyo.org/adservers/serverlist.php?hostformat=hosts&showintro=0&mimetype=plaintext
+      - https://raw.githubusercontent.com/FadeMind/hosts.extras/master/UncheckyAds/hosts
+      - https://raw.githubusercontent.com/bigdargon/hostsVN/master/hosts
+    tracking-telemetry:
+      - https://v.firebog.net/hosts/Easyprivacy.txt
+      - https://v.firebog.net/hosts/Prigent-Ads.txt
+      - https://raw.githubusercontent.com/FadeMind/hosts.extras/master/add.2o7Net/hosts
+      - https://raw.githubusercontent.com/crazy-max/WindowsSpyBlocker/master/data/hosts/spy.txt
+      - https://hostfiles.frogeye.fr/firstparty-trackers-hosts.txt
+      - https://raw.githubusercontent.com/Zelo72/rpi/master/pihole/blocklists/kees1958.txt
+    malicious:
+      - https://raw.githubusercontent.com/DandelionSprout/adfilt/master/Alternate%20versions%20Anti-Malware%20List/AntiMalwareHosts.txt
+      - https://osint.digitalside.it/Threat-Intel/lists/latestdomains.txt
+      - https://s3.amazonaws.com/lists.disconnect.me/simple_malvertising.txt
+      - https://v.firebog.net/hosts/Prigent-Crypto.txt
+      - https://bitbucket.org/ethanr/dns-blacklists/raw/8575c9f96e5b4a1308f2f12394abd86d0927a4a0/bad_lists/Mandiant_APT1_Report_Appendix_D.txt
+      - https://phishing.army/download/phishing_army_blocklist_extended.txt
+      - https://gitlab.com/quidsup/notrack-blocklists/raw/master/notrack-malware.txt
+      - https://raw.githubusercontent.com/Spam404/lists/master/main-blacklist.txt
+      - https://raw.githubusercontent.com/FadeMind/hosts.extras/master/add.Risk/hosts
+      - https://urlhaus.abuse.ch/downloads/hostfile/
+    other:
+      - https://zerodot1.gitlab.io/CoinBlockerLists/hosts_browser
+    adguardteam:
+      #- https://raw.githubusercontent.com/AdguardTeam/AdguardFilters/master/RussianFilter/sections/adservers.txt
+      #- https://raw.githubusercontent.com/AdguardTeam/AdguardFilters/master/RussianFilter/sections/adservers_firstparty.txt
+      #- https://raw.githubusercontent.com/AdguardTeam/AdguardFilters/master/RussianFilter/sections/antiadblock.txt
+      #- https://raw.githubusercontent.com/AdguardTeam/AdguardFilters/master/RussianFilter/sections/css_extended.txt
+      #- https://raw.githubusercontent.com/AdguardTeam/AdguardFilters/master/RussianFilter/sections/general_elemhide.txt
+      #- https://raw.githubusercontent.com/AdguardTeam/AdguardFilters/master/RussianFilter/sections/general_extensions.txt
+      #- https://raw.githubusercontent.com/AdguardTeam/AdguardFilters/master/RussianFilter/sections/general_url.txt
+      #- https://raw.githubusercontent.com/AdguardTeam/AdguardFilters/master/RussianFilter/sections/news_exchange.txt
+      #- https://raw.githubusercontent.com/AdguardTeam/AdguardFilters/master/RussianFilter/sections/replace.txt
+      #- https://raw.githubusercontent.com/AdguardTeam/AdguardFilters/master/RussianFilter/sections/specific.txt
+  whiteLists:
+    default:
+      - https://raw.githubusercontent.com/AdguardTeam/AdguardFilters/master/RussianFilter/sections/whitelist.txt
+  clientGroupsBlock:
+    default:
+      - default
+      - suspicious
+      - advertising
+      - tracking-telemetry
+      - malicious
+      - other
+      - adguardteam
+# optional: use this DNS server to resolve blacklist urls and upstream DNS servers (DOH). Useful if no DNS resolver is configured an
+bootstrapDns: tcp:1.1.1.1
+# Define ports
+port: 53
+httpPort: 4000
+# Prometheus Statistic
+prometheus:
+  enable: true
+  path: /metrics
+# optional: Drop all AAAA query if set to true. Default: false
+disableIPv6: true
+# Log Settings
+logLevel: info
+logFormat: text
+logTimestamp: true
+# Log Query
+queryLog:
+    dir: /logs
+    perClient: true
+    logRetentionDays: 7

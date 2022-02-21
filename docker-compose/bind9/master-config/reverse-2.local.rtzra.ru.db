@@ -1,0 +1,20 @@
+;
+; BIND reverse data file for local loopback interface
+;
+$TTL    604800
+@       IN      SOA     local.YOUR-DOMAIN.COM. root.local.YOUR-DOMAIN.COM. (
+                        2022011001      ; Serial
+                         604800         ; Refresh
+                          86400         ; Retry
+                        2419200         ; Expire
+                         604800 )       ; Negative Cache TTL
+;
+@       IN      NS      ns.local.YOUR-DOMAIN.COM.
+@       IN      A       10.10.1.20
+ns      IN      A       10.10.1.15
+ns2     IN      A       10.10.2.15
+; Reverse Lookup
+1       IN      PTR     mkt004.local.YOUR-DOMAIN.COM.
+9       IN      PTR     control01.local.YOUR-DOMAIN.COM.
+10      IN      PTR     worker01.local.YOUR-DOMAIN.COM.
+21      IN      PTR     storage01.local.YOUR-DOMAIN.COM.

@@ -1,0 +1,5 @@
+/ip service set api address=10.10.1.0/20
+/ip service enable api
+
+/user group add name=prometheus policy=api,read,winbox
+/user add name=prometheus group=prometheus password=$ecretP@ssword

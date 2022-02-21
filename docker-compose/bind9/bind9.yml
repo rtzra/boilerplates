@@ -1,0 +1,22 @@
+---
+# docker-compose -p bind9 -f bind9.yaml up -d
+version: "3.5"
+services:
+  bind9:
+    image: ubuntu/bind9
+    container_name: bind9
+    restart: always
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Moscow
+    volumes:
+      - config:/etc/bind
+      - files:/var/cache/bind
+      - files:/var/lib/bind
+    ports:
+      - 53:53/tcp
+      - 53:53/udp
+volumes:
+  config:
+  files:
