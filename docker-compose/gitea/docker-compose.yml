@@ -1,0 +1,29 @@
+version: "3"
+
+networks:
+  homelan:
+      external: true
+
+services:
+  server:
+    image: gitea/gitea
+    container_name: gitea
+    environment:
+      - USER_UID=<YOU_GITEA_USER_ID>
+      - USER_GID=<YUO_GITEA_GROUP_ID>
+    restart: always
+    networks:
+      - homelan
+    volumes:
+      - /home/git:/data
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    ports:
+      - "3000:3000"
+      - "127.0.0.1:2222:22"
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+      - "traefik.enable=true"
+      - "traefik.http.routers.gitea.rule=Host(git.home.lan)"
+      - "traefik.http.routers.gitea.entrypoints=web"
+      - "traefik.http.services.gitea.loadbalancer.server.port=3000"

@@ -1,0 +1,27 @@
+version: "3.3"
+
+services:
+    vault:
+      image: vault
+      container_name: vault
+      restart: always
+      command: vault server -config=/vault/config/vault.json
+      environment:
+        - VAULT_ADDR=http://0.0.0.0:8200
+        - VAULT_API_ADDR=http://0.0.0.0:8200
+        - VAULT_ADDRESS=http://0.0.0.0:8200
+      ports:
+        - "8200:8200"
+      volumes:
+        - ./vault:/vault
+        - ./vault/file:/vault/file
+      cap_add:
+        - IPC_LOCK
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.vault.rule=Host(`vault.local.rtzra.ru`)"
+        - "traefik.http.routers.vault.entrypoints=https"
+        - "traefik.http.routers.vault.tls=true"
+        - "traefik.http.routers.vault.middlewares=WhitelistHome"
+        - "traefik.http.services.vault.loadbalancer.server.port=8200"
+        - "com.centurylinklabs.watchtower.enable=true"
