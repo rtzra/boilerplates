@@ -1,5 +1,7 @@
 # MKTXP is a Prometheus Exporter for Mikrotik RouterOS devices
 
+https://github.com/akpw/mktxp
+
 It gathers and exports a rich set of metrics across multiple routers, all easily configurable via built-in CLI interface.
 
 ## Mikrotik Device Config
