@@ -45,4 +45,4 @@ $download_image "https://dl.rockylinux.org/pub/rocky/8/images/x86_64/Rocky-8-Gen
 
 # Rocky 9
 $download_image "https://dl.rockylinux.org/pub/rocky/9/images/x86_64/Rocky-9-GenericCloud-Base.latest.x86_64.qcow2"
-./create_template.sh 921 "tmplt-rocky-9" "Rocky-8-GenericCloud-Base.latest.x86_64.qcow2"
+./create_template.sh 921 "tmplt-rocky-9" "Rocky-9-GenericCloud-Base.latest.x86_64.qcow2"
