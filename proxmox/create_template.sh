@@ -40,6 +40,9 @@ qm set $1 --memory 2048 --cores 2 --cpu host
 # Set OS type
 qm set $1 --ostype=l26
 
+# Enable start at boot
+qm set $1 -onboot 1
+
 # Set networking to default bridge
 qm set $1 --net0 virtio,bridge=vmbr0
 
