@@ -39,10 +39,10 @@ $download_image "https://vault.astralinux.ru/images/alse/cloud/alse-vanilla-1.7.
 # --------------------
 ## Rocky
 
-# Rocky 8
+# 8 (Green Obsidian)
 $download_image "https://dl.rockylinux.org/pub/rocky/8/images/x86_64/Rocky-8-GenericCloud-Base.latest.x86_64.qcow2"
 ./create_template.sh 920 "tmplt-rocky-8" "Rocky-8-GenericCloud-Base.latest.x86_64.qcow2"
 
-# Rocky 9
+# 9 (Blue Onux)
 $download_image "https://dl.rockylinux.org/pub/rocky/9/images/x86_64/Rocky-9-GenericCloud-Base.latest.x86_64.qcow2"
 ./create_template.sh 921 "tmplt-rocky-9" "Rocky-9-GenericCloud-Base.latest.x86_64.qcow2"
