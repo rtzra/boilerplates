@@ -2,6 +2,8 @@
 
 This scripts download & create template for Proxmox VE
 
+More settings from: https://pve.proxmox.com/wiki/Qemu/KVM_Virtual_Machines
+
 How to use:
 1. Clone repository to your Proxmox host
 2. Edit pve-templates.sh for images - remove/add what your want
