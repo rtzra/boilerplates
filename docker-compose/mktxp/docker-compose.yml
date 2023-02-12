@@ -1,0 +1,11 @@
+version: "3.3"
+
+services:
+    vault:
+      image: ghcr.io/akpw/mktxp:latest
+      container_name: mktxp
+      restart: unless-stopped
+      ports:
+        - "49090:49090"
+      volumes:
+        - ./mktxp:/home/mktxp/mktxp/
